@@ -1,0 +1,313 @@
+/**
+ * Copyright 2012 Lyncode
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain setup copy of the License at
+ *
+ *     client://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.cdlib.mrt.oai.xoai;
+
+import org.cdlib.mrt.oai.element.OAIMetadata;
+import com.lyncode.xml.exceptions.XmlWriteException;
+import com.lyncode.xoai.dataprovider.builder.OAIRequestParametersBuilder;
+import com.lyncode.xoai.dataprovider.exceptions.*;
+import com.lyncode.xoai.dataprovider.filter.Filter;
+import com.lyncode.xoai.dataprovider.filter.FilterResolver;
+import com.lyncode.xoai.exceptions.InvalidResumptionTokenException;
+import com.lyncode.xoai.dataprovider.model.Context;
+import com.lyncode.xoai.dataprovider.model.ItemIdentifier;
+import com.lyncode.xoai.dataprovider.model.conditions.Condition;
+import com.lyncode.xoai.model.oaipmh.ResumptionToken;
+import com.lyncode.xoai.dataprovider.parameters.OAICompiledRequest;
+import com.lyncode.xoai.dataprovider.repository.InMemoryItemRepository;
+import com.lyncode.xoai.dataprovider.repository.InMemorySetRepository;
+import com.lyncode.xoai.dataprovider.repository.Repository;
+import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
+import com.lyncode.xoai.services.impl.SimpleResumptionTokenFormat;
+import com.lyncode.xoai.xml.XmlWritable;
+import com.lyncode.xoai.xml.XmlWriter;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+
+import javax.xml.stream.XMLStreamException;
+
+import static com.lyncode.xoai.dataprovider.model.MetadataFormat.identity;
+import com.lyncode.xoai.model.oaipmh.DeletedRecord;
+import com.lyncode.xoai.model.oaipmh.Granularity;
+import java.sql.Connection;
+import org.cdlib.mrt.oai.action.ListMetadatasAction;
+import org.cdlib.mrt.oai.element.OAIDate;
+import org.cdlib.mrt.oai.service.OAIServiceState;
+import org.cdlib.mrt.utility.LoggerInf;
+
+public abstract class OAIMrtHandlerAbstract {
+
+    private Connection connection = null;
+    private LoggerInf logger = null;
+    protected static final String FORMAT_OAI_DC = "oai_dc";
+    protected static final String FORMAT_DCS = "dcs3.1";
+    protected static final String FORMAT_DWRAP = "stash_wrapper";
+    private Context context = new Context()
+            .withMetadataFormat(FORMAT_OAI_DC, identity())
+            .withMetadataFormat(FORMAT_DCS, identity())
+            .withMetadataFormat(FORMAT_DWRAP, identity());
+    private InMemorySetRepository setRepository = new InMemorySetRepository();
+    private MrtSetRepository mrtSetRepository = null;
+    private MrtItemRepository mrtItemRepository = null;
+    private InMemoryItemRepository itemRepository = new InMemoryItemRepository();
+    /*
+    protected String repositoryName = "Merritt";
+    protected String baseURL = "http://merritt.cdlib.org/oai/v2";
+    protected String protocolVersion = "2.0"; // not set here
+    protected String adminEmail = "uc3@ucop.edu";
+    protected String earliestDatestamp = "2013-05-22 09:47:24";
+    protected String granularity = "YYYY-MM-DDThh:mm:ss";
+    protected OAIDate earlyDate = OAIDate.getDBDate(earliestDatestamp);
+    private RepositoryConfiguration repositoryConfiguration = new RepositoryConfiguration()
+            .withRepositoryName(repositoryName)
+            .withBaseUrl(baseURL)
+            .withAdminEmail(adminEmail)
+            .withEarliestDate(earlyDate.getUnixDate())
+            .withGranularity(Granularity.Second)
+            .withDeleteMethod(DeletedRecord.NO)
+            .withMaxListIdentifiers(10000)
+            .withMaxListRecords(10000)
+            .withMaxListSets(100);
+    */
+    private RepositoryConfiguration repositoryConfiguration = null;
+    private Repository repository = null;
+    private HandlerException handlerException = null;
+    protected ListMetadatasAction listMetadatasAction;
+    
+    
+    protected String verbParam = null;
+    protected String identifierParam = null;
+    protected String metadataPrefixParam = null;
+    protected String fromParam = null;
+    protected String untilParam = null;
+    protected String setParam = null;
+    protected String resumptionToken = null;
+    
+    
+    protected OAIMrtHandlerAbstract()
+    {
+        try {
+            setConfiguration();
+            setRepository(); 
+        
+        } catch (Exception ex) {
+            throw new InternalOAIException("TestAbstractMrtHandler:" + ex);
+        }
+    }
+    
+    protected OAIMrtHandlerAbstract(Connection connection, LoggerInf logger)
+    {
+        try {
+            this.logger = logger;
+            this.connection = connection;
+            setConfiguration();
+        
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new InternalOAIException("TestAbstractMrtHandler:" + ex);
+        }
+    }
+    
+    protected OAIMrtHandlerAbstract(LoggerInf logger)
+    {
+        try {
+            this.logger = logger;
+            setConfiguration();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new InternalOAIException("TestAbstractMrtHandler:" + ex);
+        }
+    }
+    
+    public void setMetaContext()
+    {
+        try {
+            listMetadatasAction = ListMetadatasAction.getListMetadatasAction(logger);
+            listMetadatasAction.setContext(context);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new InternalOAIException("TestAbstractMrtHandler:" + ex);
+        }
+    }
+    
+    private void setConfiguration()
+        throws Exception
+    {
+        OAIServiceState state = new OAIServiceState();
+        repositoryConfiguration = state.retrieveConfiguration();
+    }
+    
+    protected String write(final XmlWritable handle) throws XMLStreamException, XmlWriteException {
+        return XmlWriter.toString(new XmlWritable() {
+            @Override
+            public void write(XmlWriter writer) throws XmlWriteException {
+                try {
+                    //writer.writeStartElement("root");
+                    //writer.writeNamespace("xsi", "something");
+                    writer.write(handle);
+                    //writer.writeEndElement();
+                } catch (Exception e) {
+                    throw new XmlWriteException(e);
+                }
+            }
+        });
+    }
+    
+    public abstract String process()
+        throws Exception;
+    
+    protected void setRepository()
+    {
+        repository = new Repository()
+            .withSetRepository(setRepository)
+            .withItemRepository(itemRepository)
+            .withResumptionTokenFormatter(new SimpleResumptionTokenFormat())
+            .withConfiguration(repositoryConfiguration);
+    }
+
+    
+    protected void setRepositorySet()
+        throws Exception
+    {
+        mrtSetRepository = new MrtSetRepository(connection, logger);    
+        repository = new Repository()
+            .withSetRepository(mrtSetRepository)
+            .withItemRepository(itemRepository)
+            .withResumptionTokenFormatter(new SimpleResumptionTokenFormat())
+            .withConfiguration(repositoryConfiguration);
+    }
+    
+        
+    protected void setRepositoryRecord(OAIMetadata metaType)
+        throws Exception
+    {
+        mrtSetRepository = new MrtSetRepository(connection, logger);  
+        mrtItemRepository = new MrtItemRepository(metaType, connection, logger);
+        repository = new Repository()
+            .withSetRepository(mrtSetRepository)
+            .withItemRepository(mrtItemRepository)
+            .withResumptionTokenFormatter(new SimpleResumptionTokenFormat())
+            .withConfiguration(repositoryConfiguration);
+    }
+
+    protected String writeOriginal(final XmlWritable handle) throws XMLStreamException, XmlWriteException {
+        return XmlWriter.toString(new XmlWritable() {
+            @Override
+            public void write(XmlWriter writer) throws XmlWriteException {
+                try {
+                    writer.writeStartElement("root");
+                    writer.writeNamespace("xsi", "something");
+                    writer.write(handle);
+                    writer.writeEndElement();
+                } catch (XMLStreamException e) {
+                    throw new XmlWriteException(e);
+                }
+            }
+        });
+    }
+
+    protected OAICompiledRequest a (OAIRequestParametersBuilder builder) throws BadArgumentException, InvalidResumptionTokenException, UnknownParameterException, IllegalVerbException, DuplicateDefinitionException {
+        return OAICompiledRequest.compile(builder);
+    }
+
+    protected OAIRequestParametersBuilder request() {
+        return new OAIRequestParametersBuilder();
+    }
+
+    protected Context aContext () {
+        return context;
+    }
+    protected Context theContext () {
+        return context;
+    }
+
+    protected InMemorySetRepository theSetRepository() {
+        return setRepository;
+    }
+
+    protected InMemoryItemRepository theItemRepository () {
+        return itemRepository;
+    }
+
+    protected RepositoryConfiguration theRepositoryConfiguration() {
+        return repositoryConfiguration;
+    }
+
+    protected Repository theRepository() {
+        return repository;
+    }
+
+    protected Matcher<String> asInteger(final Matcher<Integer> matcher) {
+        return new TypeSafeMatcher<String>() {
+            @Override
+            protected boolean matchesSafely(String item) {
+                return matcher.matches(Integer.valueOf(item));
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendDescriptionOf(matcher);
+            }
+        };
+    }
+
+    protected Condition alwaysFalseCondition() {
+        return new Condition() {
+            @Override
+            public Filter getFilter(FilterResolver filterResolver) {
+                return new Filter() {
+                    @Override
+                    public boolean isItemShown(ItemIdentifier item) {
+                        return false;
+                    }
+                };
+            }
+        };
+    }
+
+    protected String valueOf(ResumptionToken.Value resumptionToken) {
+        return theRepository().getResumptionTokenFormatter()
+                .format(resumptionToken);
+    }
+    
+    public void thrownException(HandlerException handlerException, OAIRequestParametersBuilder builder)
+    {
+        builder.withHandlerException(handlerException);
+        this.handlerException = handlerException;
+    }
+    
+    public boolean isHandlerExcetpion()
+    {
+        if (handlerException == null) return false;
+        return true;
+    }
+    
+    public void dumpIn()
+    {
+        System.out.println("OAIListRecords" + "\n"
+                + "  - identifierParam:" + identifierParam + "\n"
+                + "  - metadataPrefixParam:" + metadataPrefixParam + "\n"
+                + "  - fromParam:" + fromParam + "\n"
+                + "  - untilParam:" + untilParam + "\n"
+                + "  - setParam:" + setParam + "\n"
+                + "  - resumptionToken:" + resumptionToken + "\n"
+        );
+    }
+}

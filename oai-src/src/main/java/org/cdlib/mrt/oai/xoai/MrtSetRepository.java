@@ -80,7 +80,7 @@ public class MrtSetRepository implements SetRepository
                 + " - offset=" + offset 
                 + " - length=" + length 
         );
-        ArrayList<Set> setList = new ArrayList(list.size());
+        ArrayList<Set> setList = new ArrayList<>(list.size());
         for (int len = 0; len < length; len++)
         {
             if ((offset + len) >= list.size()) break;

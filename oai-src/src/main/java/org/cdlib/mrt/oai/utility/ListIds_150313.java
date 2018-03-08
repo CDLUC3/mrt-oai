@@ -80,7 +80,7 @@ public class ListIds_150313
     protected static final boolean DEBUG = true;
 
     protected static final String NL = System.getProperty("line.separator");
-    protected LinkedHashMap<String, ListId> hash = new LinkedHashMap();
+    protected LinkedHashMap<String, ListId> hash = new LinkedHashMap<>();
     
     protected ListIds_150313() {}
     
@@ -113,7 +113,7 @@ public class ListIds_150313
     public List<ListId> getList()
     {
         if (hash.size() == 0) return null;
-        ArrayList<ListId> list = new ArrayList(hash.size());
+        ArrayList<ListId> list = new ArrayList<>(hash.size());
         Set set = hash.entrySet();
         // Get an iterator
         Iterator i = set.iterator();

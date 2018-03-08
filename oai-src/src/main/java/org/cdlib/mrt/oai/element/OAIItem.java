@@ -254,7 +254,7 @@ public class OAIItem
     public ArrayList<Set> getXoaiSets()
     {
         if ((oaiSets == null) || (oaiSets.size() == 0)) return null;
-        ArrayList<Set> xoaiSets = new ArrayList(oaiSets.size());
+        ArrayList<Set> xoaiSets = new ArrayList<>(oaiSets.size());
         for (OAISet set : oaiSets) {
             Set xoaiSet = set.getXOAISet();
             xoaiSets.add(xoaiSet);
@@ -305,7 +305,7 @@ public class OAIItem
      */
     public List<Set> getSets() {
         if ((oaiSets == null) || (oaiSets.size() == 0)) return null;
-        ArrayList<Set> sets = new ArrayList(oaiSets.size());
+        ArrayList<Set> sets = new ArrayList<>(oaiSets.size());
         for (OAISet oaiSet : oaiSets) {
             Set set = oaiSet.getXOAISet();
             sets.add(set);

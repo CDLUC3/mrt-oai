@@ -81,7 +81,7 @@ public class ListItems
     protected static final boolean DEBUG = true;
 
     protected static final String NL = System.getProperty("line.separator");
-    protected ArrayList<ListItem> list = new ArrayList();
+    protected ArrayList<ListItem> list = new ArrayList<>();
     
     protected ListItems() {}
     

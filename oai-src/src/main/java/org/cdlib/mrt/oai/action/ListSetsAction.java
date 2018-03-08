@@ -84,7 +84,7 @@ public class ListSetsAction
     {
         try {
             list = OAIDBUtil.getPublicCollections(connection, logger);
-            oaiSetList = new ArrayList(list.size());
+            oaiSetList = new ArrayList<>(list.size());
             for (InvCollection collection : list) {
                 oaiSetList.add(OAISet.getOAISet(collection));
             }

@@ -101,7 +101,7 @@ public class OAIDBUtil
             log("InvDBUtil - length == 0");
             return null;
         }
-        ArrayList<InvCollection> copiesList = new ArrayList(propArray.length);
+        ArrayList<InvCollection> copiesList = new ArrayList<>(propArray.length);
         
         for (Properties prop : propArray) {
             InvCollection collection = new InvCollection(prop, logger);

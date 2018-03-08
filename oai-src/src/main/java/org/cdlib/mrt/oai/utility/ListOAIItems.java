@@ -82,7 +82,7 @@ public class ListOAIItems
     protected static final boolean DEBUG = true;
 
     protected static final String NL = System.getProperty("line.separator");
-    protected ArrayList<OAIItem> list = new ArrayList();
+    protected ArrayList<OAIItem> list = new ArrayList<>();
     
     public static ListOAIItems getListOAIItems(Properties[] propArray)
     {

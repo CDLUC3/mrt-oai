@@ -127,7 +127,7 @@ public class ListOAIIdsAction
             
             listOAIds = OAIDBUtil.getIdsContent(metaType, setMnemonic, from, until, connection, logger);
             if (listOAIds == null) {
-                list = new ArrayList();
+                list = new ArrayList<>();
             } else {
                 list = listOAIds.getList();
             }
@@ -171,7 +171,7 @@ public class ListOAIIdsAction
         int length = 1000000;
         if (offsetIn != null) offset = offsetIn;
         if (lengthIn != null) length = lengthIn;
-        ArrayList<ItemIdentifier> listIds = new ArrayList();
+        ArrayList<ItemIdentifier> listIds = new ArrayList<>();
         for (int len = 0; len < length; len++)
         {
             if ((offset + len) >= list.size()) break;

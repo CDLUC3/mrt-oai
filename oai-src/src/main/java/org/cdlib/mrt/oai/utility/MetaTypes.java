@@ -83,7 +83,7 @@ public class MetaTypes
     protected static final boolean DEBUG = true;
 
     protected final Properties metaProp;
-    protected ArrayList<MetaType> list = new ArrayList();
+    protected ArrayList<MetaType> list = new ArrayList<>();
     
     public static MetaTypes getMetaTypes(Properties metaProp)
         throws HandlerException

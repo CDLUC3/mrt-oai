@@ -77,39 +77,6 @@
 
 
   <dependencies>
-     
-    <!-- Internal dependencies -->
-    <dependency>
-      <groupId>org.cdlib.mrt</groupId>
-      <artifactId>mrt-confmysql</artifactId>
-      <version>${propertyDir}-1.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.cdlib.mrt</groupId>
-        <artifactId>mrt-core</artifactId>
-        <version>2.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.cdlib.mrt</groupId>
-      <artifactId>mrt-inventorysrc</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.cdlib.mrt</groupId>
-      <artifactId>mrt-oaiconfpub</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.cdlib.mrt</groupId>
-      <artifactId>mrt-oaisrcpub</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-
-    <!-- 3rd party dependencies -->
     <dependency>
       <groupId>com.jolbox</groupId>
       <artifactId>bonecp</artifactId>
@@ -167,6 +134,36 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.13</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.cdlib.mrt</groupId>
+      <artifactId>mrt-confmysql</artifactId>
+      <version>${propertyDir}-1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.cdlib.mrt</groupId>
+        <artifactId>mrt-core</artifactId>
+        <version>2.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.cdlib.mrt</groupId>
+      <artifactId>mrt-inventorysrc</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.cdlib.mrt</groupId>
+      <artifactId>mrt-oaiconfpub</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.cdlib.mrt</groupId>
+      <artifactId>mrt-oaisrcpub</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>

@@ -50,12 +50,14 @@
   </build>
 
   <dependencies>
+
+<!--
     <dependency>
       <groupId>com.jolbox</groupId>
       <artifactId>bonecp</artifactId>
-      <!--version>0.7.2-SNAPSHOT</version-->
       <version>0.7.1-rc3</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>com.lyncode</groupId>
@@ -67,21 +69,25 @@
       <groupId>com.lyncode</groupId>
       <artifactId>xml-io</artifactId>
       <version>1.0.3</version>
+      <exclusions>
+        <exclusion>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
       <groupId>com.lyncode</groupId>
       <artifactId>xoai-common</artifactId>
       <version>4.1.1-SNAPSHOT</version>
+      <exclusions>
+        <exclusion>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
-
-    <!-- why is this one listed twice?
-    <dependency>
-      <groupId>com.lyncode</groupId>
-      <artifactId>xoai-data-provider</artifactId>
-      <version>4.1.0</version>
-    </dependency>
-    -->
 
     <dependency>
       <groupId>com.lyncode</groupId>
@@ -89,12 +95,15 @@
       <version>4.1.1-SNAPSHOT</version>
     </dependency>
 
+<!--
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
       <version>1.4.1</version>
     </dependency>
+-->
 
+    <!-- probably don't need this at all -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
@@ -121,6 +130,7 @@
       <scope>test</scope>
     </dependency>
 
+<!--
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
@@ -132,6 +142,7 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.13</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -139,16 +150,19 @@
       <version>3.1</version>
     </dependency>
 
+<!--
     <dependency>
       <groupId>org.apache.tika</groupId>
       <artifactId>tika-app</artifactId>
       <version>1.2</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>org.cdlib.mrt</groupId>
       <artifactId>mrt-confmysql</artifactId>
       <version>${propertyDir}-1.0-SNAPSHOT</version>
+      <scope>runtime</scope>
     </dependency>
 
     <dependency>
@@ -167,12 +181,14 @@
       <groupId>org.cdlib.mrt</groupId>
       <artifactId>mrt-oaiconfpub</artifactId>
       <version>1.0-SNAPSHOT</version>
+      <scope>runtime</scope>
     </dependency>
 
     <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
       <artifactId>jersey-container-servlet</artifactId>
       <version>2.25.1</version>
+      <scope>runtime</scope>
     </dependency>
 
     <dependency>
@@ -181,6 +197,7 @@
       <version>2.25.1</version>
     </dependency>
 
+<!--
     <dependency>
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-multipart</artifactId>
@@ -192,6 +209,7 @@
       <artifactId>jersey-client</artifactId>
       <version>2.25.1</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -212,11 +230,13 @@
       <scope>test</scope>
     </dependency>
 
+<!--
     <dependency>
       <groupId>stax</groupId>
       <artifactId>stax-api</artifactId>
       <version>1.0.1</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>xml-apis</groupId>
@@ -239,42 +259,30 @@
 </project>
 
 
-<!-- commented out dependencies -->
+<!--
+[INFO] - maven-dependency-plugin:2.1:analyze (default-cli) @ mrt-oaisrcpub -
+[WARNING] Unused declared dependencies found:
+[WARNING]    com.jolbox:bonecp:jar:0.7.1-rc3:compile
+[WARNING]    javax.mail:mail:jar:1.4.1:compile
+[WARNING]    log4j:log4j:jar:1.2.16:compile
+[WARNING]    mysql:mysql-connector-java:jar:5.1.13:compile
+[WARNING]    org.apache.tika:tika-app:jar:1.2:compile
+[WARNING]    org.cdlib.mrt:mrt-confmysql:jar:test-1.0-SNAPSHOT:compile
+[WARNING]    org.cdlib.mrt:mrt-oaiconfpub:jar:1.0-SNAPSHOT:compile
+[WARNING]    org.glassfish.jersey.containers:jersey-container-servlet:jar:2.25.1:compile
+[WARNING]    org.glassfish.jersey.media:jersey-media-multipart:jar:2.25.1:compile
+[WARNING]    org.glassfish.jersey.core:jersey-client:jar:2.25.1:compile
+[WARNING]    org.hamcrest:hamcrest-core:jar:1.3:test
+[WARNING]    stax:stax-api:jar:1.0.1:compile
 
-    <!--
-    <dependency>
-      <groupId>org.cdlib.mrt</groupId>
-      <artifactId>mrt-s3srcpub</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
+Keeping - set non-compile scope
+  org.cdlib.mrt:mrt-confmysql:jar:test-1.0-SNAPSHOT:runtime
+  org.cdlib.mrt:mrt-oaiconfpub:jar:1.0-SNAPSHOT:runtime
+  org.glassfish.jersey.containers:jersey-container-servlet:jar:2.25.1:runtime
+  org.hamcrest:hamcrest-core:jar:1.3:test
 
-    <dependency>
-      <groupId>org.cdlib.mrt</groupId>
-    <artifactId>mrt-confs3</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
+Notes
+  had to add exclusions for stax:stax-api:jar:1.0.1 to 2 lyncode deps.  This was 
+  colliding with explicit declaration of javax.xml.stream:stax-api:jar:1.0-2
 
-    <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>jsr311-api</artifactId>
-      <version>1.1</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.2.5</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpcore</artifactId>
-      <version>4.2.4</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpmime</artifactId>
-      <version>4.2.5</version>
-    </dependency>
-    -->
+-->

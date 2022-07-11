@@ -44,7 +44,7 @@ import org.cdlib.mrt.oai.service.OAIServiceProperties;
  * @author dloy
  */
 public class OAIServiceInit
-        extends TFrameInit
+        //extends TFrameInit
 {
     private static final String serviceName = "OAIService";
 
@@ -62,7 +62,7 @@ public class OAIServiceInit
     {
         if (oaiServiceProperties == null) {
             oaiServiceProperties = OAIServiceProperties.getOAIServiceProperties();
-            System.out.println(MESSAGE + "OAIServiceProperties allocated");
+            System.out.println("OAIServiceProperties allocated");
         }
         return OAIService.getOAIService(oaiServiceProperties);
     }
@@ -116,7 +116,7 @@ public class OAIServiceInit
     protected OAIServiceInit(Type type, ServletConfig servletConfig, String serviceName)
             throws TException
     {
-        super(servletConfig, serviceName);
+        //super(servletConfig, serviceName);
         if (type == Type.Regular) {
             oaiServiceProperties =
                     OAIServiceProperties.getOAIServiceProperties();

@@ -73,11 +73,11 @@
           <version>2.0-SNAPSHOT</version>
        </dependency>
 
-       <dependency>
+       <!--dependency>
 	  <groupId>com.lyncode</groupId>
 	  <artifactId>xoai-data-provider</artifactId>
 	  <version>4.1.0</version>
-       </dependency>
+       </dependency-->
 
        <dependency>
 	  <groupId>com.lyncode</groupId>

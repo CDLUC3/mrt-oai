@@ -34,6 +34,7 @@ pipeline {
             steps {
                 script {
                   new BuildFunctions().init_build();
+                  sh("echo 'hello'")
                 }
             }
         }

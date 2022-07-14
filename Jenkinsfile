@@ -34,7 +34,6 @@ pipeline {
             steps {
                 script {
                   new BuildFunctions().init_build();
-                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${HOME}/.m2-oai/repository/com/lyncode")
                 }
             }
         }

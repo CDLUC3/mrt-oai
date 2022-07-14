@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                   new BuildFunctions().init_build();
-                  sh("echo 'hello'")
+                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${HOME}/.m2-oai/repository/com/lyncode")
                 }
             }
         }
@@ -103,22 +103,16 @@ pipeline {
                 }
             }
         }
-        stage('Build xoai Source') {
+        stage('Copy xoai Source') {
             steps {
-                dir('mrt-inventory') {
-                  script {
-                    new BuildFunctions().build_library(
-                      'https://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@github.com/cdlib/mrt-conf-prv', 
-                      env.BRANCH_XOAI, 
-                      '-DskipTests'
-                    )
-                  }
+                script {
+                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${HOME}/.m2-oai/repository/com/lyncode")
                 }
             }
         }
         stage('Build OAI') {
             steps {
-                dir('mrt-sword'){
+                dir('mrt-oai'){
                   script {
                     new BuildFunctions().build_war(
                       'https://github.com/CDLUC3/mrt-oai.git',

@@ -105,7 +105,7 @@ pipeline {
         stage('Copy xoai Source') {
             steps {
                 script {
-                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${HOME}/.m2-oai/repository/com/lyncode")
+                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${HOME}/.m2-oai/com/lyncode")
                 }
             }
         }

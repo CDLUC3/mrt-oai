@@ -107,7 +107,7 @@ pipeline {
                 dir('mrt-inventory') {
                   script {
                     new BuildFunctions().build_library(
-                      'https://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@github.com/dloy/CDLUC3/mrt-conf-prv.git', 
+                      'https://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@github.com/dloy/cdlib/mrt-conf-prv.git', 
                       env.BRANCH_XOAI, 
                       '-DskipTests'
                     )

@@ -43,6 +43,7 @@ import java.sql.Connection;
 
 
 import org.cdlib.mrt.inv.utility.DPRFileDB;
+import org.cdlib.mrt.oai.action.OAIConfig;
 import org.cdlib.mrt.queue.DistributedQueue;
 import org.cdlib.mrt.utility.PropertiesUtil;
 import org.cdlib.mrt.utility.TFileLogger;
@@ -60,10 +61,6 @@ public class OAIServiceProperties
     private static final String MESSAGE = NAME + ": ";
     private static final boolean DEBUG = false;
 
-    protected Properties serviceProperties = null;
-    protected Properties setupProperties = null;
-    protected File oaiService = null;
-    protected File oaiInfo = null;
     protected DPRFileDB db = null;
     protected Thread zooHandlerThread = null;
     protected long zooPollTime = 120000;
@@ -72,59 +69,22 @@ public class OAIServiceProperties
     protected boolean shutdown = true;
     protected String storageBase = null;
     protected OAIServiceState serviceState = null;
+    protected OAIConfig oaiConfig = null;
 
     public static OAIServiceProperties getOAIServiceProperties()
         throws TException
     {
-        try {
-            String propertyList[] = {
-                "resources/OAI.properties",
-                "resources/Logger.properties",
-                "resources/Mysql.properties",
-            };
-            TFrame mFrame = new TFrame(propertyList, NAME);
-            Properties prop = mFrame.getAllProperties();
-            System.out.println(PropertiesUtil.dumpProperties(NAME, prop));
-            return new OAIServiceProperties(prop);
-            
-        } catch (TException tex) {
-            System.out.println(MESSAGE + "Exception:" +  tex);
-            throw tex;
-        }
+        OAIConfig oaiConfig = OAIConfig.getOAIConfig();
+        return new OAIServiceProperties(oaiConfig);
     }
 
-    public static OAIServiceProperties getOAIServiceProperties(Properties prop)
-        throws TException
-    {
-        return new OAIServiceProperties(prop);
-    }
-
-    protected OAIServiceProperties(Properties setupProp)
+    protected OAIServiceProperties(OAIConfig oaiConfig)
         throws TException
     {
         try {
-            this.setupProperties = setupProp;
-            
-            //System.out.println(PropertiesUtil.dumpProperties("setupProp", setupProp));
-            String oaiServiceS = setupProp.getProperty("OAIService");
-            if (StringUtil.isEmpty(oaiServiceS)) {
-                throw new TException.INVALID_OR_MISSING_PARM(MESSAGE + "missing property: OAIService");
-            }
-            oaiService = new File(oaiServiceS);
-            if (!oaiService.exists()) {
-                throw new TException.INVALID_OR_MISSING_PARM(MESSAGE + "inv service directory does not exist:"
-                        + oaiService.getCanonicalPath());
-            }
-            File logDir = new File(oaiService, "log");
-            if (!logDir.exists()) {
-                logDir.mkdir();
-            }
-            logger = new TFileLogger("oai", logDir.getCanonicalPath() + '/', setupProp);
-            
-            setupProp.remove("db.pw");
-            if (DEBUG) System.out.println(PropertiesUtil.dumpProperties("***" + NAME, setupProp));
-            
-            db = new DPRFileDB(logger, setupProp);
+            this.oaiConfig = oaiConfig;
+            logger = oaiConfig.getLogger();
+            db = oaiConfig.startDB();
             //Properties serviceProperties = addInit(oaiService, setupProp);
             serviceState = new OAIServiceState();
 
@@ -134,10 +94,10 @@ public class OAIServiceProperties
         }
     }
     
-    public DPRFileDB getNewDb()
+    protected DPRFileDB getNewDb()
         throws TException
     {
-        return new DPRFileDB(logger, setupProperties);
+        return oaiConfig.startDB();
     }
 
     public DPRFileDB getDb() {

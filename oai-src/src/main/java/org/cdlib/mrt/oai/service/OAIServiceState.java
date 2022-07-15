@@ -36,15 +36,18 @@ import com.lyncode.xoai.model.oaipmh.Granularity;
 import com.lyncode.xoai.model.oaipmh.DeletedRecord;
 import java.io.File;
 import java.util.Properties;
-
+import org.cdlib.mrt.oai.action.OAIConfig;
 import org.cdlib.mrt.core.DateState;
 import org.cdlib.mrt.core.ServiceStatus;
+import org.cdlib.mrt.inv.utility.DPRFileDB;
 import org.cdlib.mrt.oai.element.OAIDate;
 import org.cdlib.mrt.oai.utility.OAIUtil;
+import org.cdlib.mrt.utility.LoggerInf;
 import org.cdlib.mrt.utility.PropertiesUtil;
 import org.cdlib.mrt.utility.StringUtil;
 import org.cdlib.mrt.utility.StateInf;
 import org.cdlib.mrt.utility.TException;
+import org.cdlib.mrt.utility.TFileLogger;
 import org.cdlib.mrt.utility.TFrame;
 
 /**
@@ -71,19 +74,14 @@ public class OAIServiceState
     protected DeletedRecord deleteMethod = null;
     private RepositoryConfiguration repositoryConfiguration = null;
     protected Granularity granularity = null;
+    protected static OAIConfig oaiConfig = null;
     
     public OAIServiceState() 
         throws TException
     {
         try {
-            String propertyList[] = {
-                "resources/OAI.properties"};
-            TFrame mFrame = new TFrame(propertyList, NAME);
-            Properties setupProp = mFrame.getProperties();
-            
-            //System.out.println(PropertiesUtil.dumpProperties("setupProp", setupProp));
-            String oaiServiceS = setupProp.getProperty("OAIService");
-            Properties infoProp = OAIUtil.getInfoProp(oaiServiceS, "oai-info.txt");
+            oaiConfig = OAIConfig.getOAIConfig();
+            Properties infoProp = oaiConfig.getServiceProperties();
             setValues(infoProp);
             
         } catch (TException tex) {
@@ -91,11 +89,17 @@ public class OAIServiceState
             throw tex;
         }
     }
-
-    public OAIServiceState(Properties prop)
-    {
-        System.out.println(PropertiesUtil.dumpProperties("***" + NAME, prop));
-        setValues(prop);
+    
+    public static void main(String[] argv) {
+    	
+    	try {
+            OAIServiceState state = new OAIServiceState();
+            
+        } catch (Exception ex) {
+                // TODO Auto-generated catch block
+                System.out.println("Exception:" + ex);
+                ex.printStackTrace();
+        }
     }
 
     public void setConfiguration()

@@ -16,11 +16,11 @@ pipeline {
       BRANCH_ZK = 'main'
       BRANCH_MRTZOO = 'main'
       BRANCH_INV = 'main'
-      BRANCH_XOAI = 'refactor'
+      BRANCH_XOAI = 'main'
 
       //working vars
       M2DIR = "${HOME}/.m2-oai"
-      DEF_BRANCH = "refactor"
+      DEF_BRANCH = "main"
     }
     agent any
 

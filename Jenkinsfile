@@ -102,10 +102,10 @@ pipeline {
                 }
             }
         }
-        stage('Copy xoai Source') {
+        stage('Copy xoai jars') {
             steps {
                 script {
-                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${HOME}/.m2-oai/com/lyncode")
+                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${M2DIR}/com/lyncode")
                 }
             }
         }

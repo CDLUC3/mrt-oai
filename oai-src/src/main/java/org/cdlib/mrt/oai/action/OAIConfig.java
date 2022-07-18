@@ -83,12 +83,12 @@ public class OAIConfig
         else return useYaml();
     }
     
-    public static OAIConfig useYaml()
+    protected static OAIConfig useYaml()
         throws TException
     {
         try {
             JSONObject oaiInfoJSON = getYamlJson();
-            OAIConfig oaiConfig = new OAIConfig(oaiInfoJSON);
+            oaiConfig = new OAIConfig(oaiInfoJSON);
             
             return oaiConfig;
             
@@ -111,7 +111,7 @@ public class OAIConfig
             
             serviceJSON = oaiInfoJSON.getJSONObject("service");
             setServiceProp(serviceJSON);
-            System.out.println(PropertiesUtil.dumpProperties("SwordConfig.serviceProperties", serviceProperties));
+            System.out.println(PropertiesUtil.dumpProperties("OAIConfig.serviceProperties", serviceProperties));
             jdb = oaiInfoJSON.getJSONObject("db");
             
             JSONObject fileLogger = oaiInfoJSON.getJSONObject("fileLogger");

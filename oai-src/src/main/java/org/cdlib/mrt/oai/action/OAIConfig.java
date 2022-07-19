@@ -137,16 +137,16 @@ public class OAIConfig
             Test test=new Test();
             InputStream propStream =  test.getClass().getClassLoader().
                     getResourceAsStream(propName);
-            String swordYaml = StringUtil.streamToString(propStream, "utf8");
-            System.out.println("oaiYaml:\n" + swordYaml);
+            String oaiYaml = StringUtil.streamToString(propStream, "utf8");
+            System.out.println("oaiYaml:\n" + oaiYaml);
             String invInfoConfig = getYamlInfo();
             System.out.println("\n\n***table:\n" + invInfoConfig);
             String rootPath = System.getenv("SSM_ROOT_PATH");
             System.out.append("\n\n***root:\n" + rootPath + "\n");
             SSMConfigResolver ssmResolver = new SSMConfigResolver();
             YamlParser yamlParser = new YamlParser(ssmResolver);
-            System.out.println("\n\n***SwordYaml:\n" + swordYaml);
-            LinkedHashMap<String, Object> map = yamlParser.parseString(swordYaml);
+            System.out.println("\n\n***oaiYaml:\n" + oaiYaml);
+            LinkedHashMap<String, Object> map = yamlParser.parseString(oaiYaml);
             LinkedHashMap<String, Object> lmap = (LinkedHashMap<String, Object>)map.get(invInfoConfig);
             if (lmap == null) {
                 throw new TException.INVALID_CONFIGURATION(MESSAGE + "Unable to locate configuration");

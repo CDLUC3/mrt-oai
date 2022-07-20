@@ -33,17 +33,17 @@ oai-info:
 oai-info-docker: &docker
   service:
     repositoryName: Merritt
-    baseURL: http://merritt.cdlib.org/oai/v2
+    baseURL: "http://{!ENV: MRT_DOCKER_HOST !DEFAULT: localhost}:8083/oai/oai/v2"
     protocolVersion: "2.0"
     adminEmail: uc3@ucop.edu
-    earliestDate: 2013-05-22 09:47:24
+    earliestDate: "2013-05-22 09:47:24"
     granularity: YYYY-MM-DDThh:mm:ssZ
     deletedMethod: "NO"
     maxListIdentifiers: "10000"
     maxListRecords: "10000"
     maxListSets: "100"
     name: UC3
-    identifier: "{!ENV: ID_OAI !DEFAULT: uc3-mrtoai-stg.cdlib.org}"
+    identifier: "{!ENV: ID_OAI !DEFAULT: mrtoai-docker}"
     threadPool: "5"
     queueCapacity: "15"
     nodePath: yaml
@@ -52,7 +52,7 @@ oai-info-docker: &docker
   fileLogger:
     messageMaximumLevel: 5
     messageMaximumError: 10
-    path: /tdr/tmpdir
+    path: /tmp
     name: inv
     qualifier: yyMMdd
     trace: 5

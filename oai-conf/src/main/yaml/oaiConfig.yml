@@ -33,7 +33,7 @@ oai-info:
 oai-info-docker: &docker
   service:
     repositoryName: Merritt
-    baseURL: http://${HOSTNAME}.cdlib.org:8083/oai/v2
+    baseURL: "http://{!ENV: MRT_DOCKER_HOST !DEFAULT: localhost}:8083/oai/v2"
     protocolVersion: "2.0"
     adminEmail: uc3@ucop.edu
     earliestDate: 2013-05-22 09:47:24

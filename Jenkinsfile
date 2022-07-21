@@ -16,7 +16,6 @@ pipeline {
       BRANCH_ZK = 'main'
       BRANCH_MRTZOO = 'main'
       BRANCH_INV = 'main'
-      BRANCH_XOAI = 'main'
 
       //working vars
       M2DIR = "${HOME}/.m2-oai"
@@ -99,13 +98,6 @@ pipeline {
                       '-DskipTests'
                     )
                   }
-                }
-            }
-        }
-        stage('Copy xoai jars') {
-            steps {
-                script {
-                  sh("cp -r ${HOME}/.m2/repository/com/lyncode ${M2DIR}/com/lyncode")
                 }
             }
         }

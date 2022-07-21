@@ -5,33 +5,19 @@
  */
 package org.cdlib.mrt.oai.xoai;
 
-import com.lyncode.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.IdDoesNotExistException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
-import com.lyncode.xoai.dataprovider.exceptions.OAIException;
-import com.lyncode.xoai.dataprovider.filter.ScopedFilter;
-import com.lyncode.xoai.dataprovider.handlers.results.ListItemIdentifiersResult;
-import com.lyncode.xoai.dataprovider.handlers.results.ListItemsResults;
-import com.lyncode.xoai.dataprovider.handlers.results.ListSetsResult;
-import com.lyncode.xoai.dataprovider.repository.Repository;
-import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
-import com.lyncode.xoai.model.oaipmh.DeletedRecord;
-import com.lyncode.xoai.model.oaipmh.Granularity;
-import com.lyncode.xoai.services.impl.SimpleResumptionTokenFormat;
-import com.lyncode.xoai.dataprovider.repository.SetRepository;
-import com.lyncode.xoai.dataprovider.handlers.results.ListSetsResult;
-import com.lyncode.xoai.dataprovider.model.Item;
-import com.lyncode.xoai.dataprovider.model.Set;
-import com.lyncode.xoai.dataprovider.repository.ItemRepository;
+import org.dspace.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
+import org.dspace.xoai.dataprovider.exceptions.IdDoesNotExistException;
+import org.dspace.xoai.dataprovider.exceptions.OAIException;
+import org.dspace.xoai.dataprovider.filter.ScopedFilter;
+import org.dspace.xoai.dataprovider.handlers.results.ListItemIdentifiersResult;
+import org.dspace.xoai.dataprovider.handlers.results.ListItemsResults;
+import org.dspace.xoai.dataprovider.model.Item;
+import org.dspace.xoai.dataprovider.repository.ItemRepository;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.cdlib.mrt.core.Identifier;
-import org.cdlib.mrt.inv.content.InvCollection;
 import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.inv.utility.DPRFileDB;
 import org.cdlib.mrt.oai.action.ListOAIIdsAction;
 import org.cdlib.mrt.oai.action.ListOAIItemsAction;
 import org.cdlib.mrt.oai.action.RecordAction;
@@ -39,8 +25,6 @@ import org.cdlib.mrt.oai.element.OAIDate;
 import org.cdlib.mrt.oai.element.OAIId;
 import org.cdlib.mrt.oai.element.OAIItem;
 import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.element.OAISet;
-import org.cdlib.mrt.oai.utility.ListItems;
 import org.cdlib.mrt.oai.utility.OAIDBUtil;
 /**
  *
@@ -106,7 +90,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListIdentifiers">List Identifiers definition</a>
      */
     public ListItemIdentifiersResult getItemIdentifiers(
-            List<ScopedFilter> filters, int offset, int length) throws CannotDisseminateFormatException, OAIException
+            List<ScopedFilter> filters, int offset, int length) throws OAIException
     {       
         try {
             //throw new OAIException("metadata prefix required");
@@ -142,7 +126,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListIdentifiers">List Identifiers definition</a>
      */
     public ListItemIdentifiersResult getItemIdentifiers(
-            List<ScopedFilter> filters, int offset, int length, Date from) throws CannotDisseminateFormatException, OAIException
+            List<ScopedFilter> filters, int offset, int length, Date from) throws OAIException
     {       
         try {
             //throw new OAIException("metadata prefix required");
@@ -178,7 +162,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListIdentifiers">List Identifiers definition</a>
      */
     public ListItemIdentifiersResult getItemIdentifiersUntil(
-            List<ScopedFilter> filters, int offset, int length, Date until) throws CannotDisseminateFormatException, OAIException
+            List<ScopedFilter> filters, int offset, int length, Date until) throws OAIException
     {       
         try {
             //throw new OAIException("metadata prefix required");
@@ -215,7 +199,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListIdentifiers">List Identifiers definition</a>
      */
     public ListItemIdentifiersResult getItemIdentifiers(
-            List<ScopedFilter> filters, int offset, int length, Date from, Date until) throws CannotDisseminateFormatException, OAIException
+            List<ScopedFilter> filters, int offset, int length, Date from, Date until) throws OAIException
     {       
         try {
             //throw new OAIException("metadata prefix required");
@@ -252,7 +236,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListIdentifiers">List Identifiers definition</a>
      */
     public ListItemIdentifiersResult getItemIdentifiers(
-            List<ScopedFilter> filters, int offset, int length, String setSpec) throws CannotDisseminateFormatException, OAIException
+            List<ScopedFilter> filters, int offset, int length, String setSpec) throws OAIException
     {
         try {
             ListItemIdentifiersResult results = getIds(
@@ -286,7 +270,7 @@ public class MrtItemRepository implements ItemRepository
      */
     public ListItemIdentifiersResult getItemIdentifiers(
             List<ScopedFilter> filters, int offset, int length, String setSpec,
-            Date from) throws CannotDisseminateFormatException, OAIException
+            Date from) throws OAIException
     {
         try {
             OAIDate fromOAI = OAIDate.getUnixDate(from);
@@ -321,7 +305,7 @@ public class MrtItemRepository implements ItemRepository
      */
     public ListItemIdentifiersResult getItemIdentifiersUntil(
             List<ScopedFilter> filters, int offset, int length, String setSpec,
-            Date until) throws CannotDisseminateFormatException, OAIException
+            Date until) throws OAIException
     {
         try {
             OAIDate untilOAI = OAIDate.getUnixDate(until);
@@ -357,7 +341,7 @@ public class MrtItemRepository implements ItemRepository
      */
     public ListItemIdentifiersResult getItemIdentifiers(
             List<ScopedFilter> filters, int offset, int length, String setSpec,
-            Date from, Date until) throws CannotDisseminateFormatException, OAIException
+            Date from, Date until) throws OAIException
     {
         try {
             OAIDate fromOAI = OAIDate.getUnixDate(from);
@@ -390,7 +374,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItems(List<ScopedFilter> filters,
-                                     int offset, int length) throws CannotDisseminateFormatException, OAIException
+                                     int offset, int length) throws OAIException
     {
         
         try {
@@ -426,7 +410,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItems(List<ScopedFilter> filters,
-                                     int offset, int length, Date from) throws CannotDisseminateFormatException, OAIException
+                                     int offset, int length, Date from) throws OAIException
     {
         
         try {
@@ -463,7 +447,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItemsUntil(List<ScopedFilter> filters,
-                                          int offset, int length, Date until) throws CannotDisseminateFormatException, OAIException
+                                          int offset, int length, Date until) throws OAIException
     {
         
         try {
@@ -501,7 +485,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItems(List<ScopedFilter> filters,
-                                     int offset, int length, Date from, Date until) throws CannotDisseminateFormatException, OAIException
+                                     int offset, int length, Date from, Date until) throws OAIException
     {
         try {
             //throw new OAIException("metadata prefix required");
@@ -538,7 +522,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItems(List<ScopedFilter> filters,
-                                     int offset, int length, String setSpec) throws CannotDisseminateFormatException, OAIException
+                                     int offset, int length, String setSpec) throws OAIException
     {
         try {
             ListItemsResults results = getResults(
@@ -571,7 +555,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItems(List<ScopedFilter> filters,
-                                     int offset, int length, String setSpec, Date from) throws CannotDisseminateFormatException, OAIException
+                                     int offset, int length, String setSpec, Date from) throws OAIException
     {
         try {
             OAIDate fromOAI = OAIDate.getUnixDate(from);
@@ -605,7 +589,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItemsUntil(List<ScopedFilter> filters,
-                                          int offset, int length, String setSpec, Date until) throws CannotDisseminateFormatException, OAIException
+                                          int offset, int length, String setSpec, Date until) throws OAIException
     {
         try {
             OAIDate untilOAI = OAIDate.getUnixDate(until);
@@ -640,7 +624,7 @@ public class MrtItemRepository implements ItemRepository
      * @see <a href="client://www.openarchives.org/OAI/openarchivesprotocol.html#ListRecords">List Records Definition</a>
      */
     public ListItemsResults getItems(List<ScopedFilter> filters,
-                                     int offset, int length, String setSpec, Date from, Date until) throws CannotDisseminateFormatException, OAIException
+                                     int offset, int length, String setSpec, Date from, Date until) throws OAIException
     {
         try {
             OAIDate fromOAI = OAIDate.getUnixDate(from);
@@ -669,7 +653,7 @@ public class MrtItemRepository implements ItemRepository
             OAIDate untilOAI,
             Connection connection,
             LoggerInf logger)
-            throws CannotDisseminateFormatException, OAIException
+            throws OAIException
     {
         try {
             if (metaType.isUnknown()) {
@@ -700,7 +684,7 @@ public class MrtItemRepository implements ItemRepository
             OAIDate untilOAI,
             Connection connection,
             LoggerInf logger)
-            throws CannotDisseminateFormatException, OAIException
+            throws OAIException
     {
         try {
             if (metaType.isUnknown()) {

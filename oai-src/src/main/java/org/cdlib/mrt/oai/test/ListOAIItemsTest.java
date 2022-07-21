@@ -11,29 +11,17 @@ import java.util.List;
 import java.util.Properties;
 
 
-import org.cdlib.mrt.core.Identifier;
-import org.cdlib.mrt.oai.action.RecordAction;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import org.cdlib.mrt.utility.PropertiesUtil;
 import org.cdlib.mrt.utility.TException;
 import org.cdlib.mrt.utility.TFileLogger;
 import org.cdlib.mrt.utility.StringUtil;
 import org.cdlib.mrt.utility.LoggerInf;
 import org.cdlib.mrt.utility.TFrame;
-import org.cdlib.mrt.inv.content.InvMeta;
-import org.cdlib.mrt.inv.content.InvVersion;
 import org.cdlib.mrt.inv.utility.DPRFileDB;
-import org.cdlib.mrt.inv.utility.InvDBUtil;
-import org.cdlib.mrt.inv.utility.InvUtil;
-import org.cdlib.mrt.inv.zoo.ItemRun;
-import org.cdlib.mrt.inv.action.SaveObject;
 import org.cdlib.mrt.oai.action.ListOAIItemsAction;
+import org.cdlib.mrt.oai.action.OAIConfig;
 import org.cdlib.mrt.oai.element.OAIDate;
-import org.cdlib.mrt.oai.element.OAIId;
 import org.cdlib.mrt.oai.element.OAIItem;
 import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.utility.OAIDBUtil;
-import org.cdlib.mrt.oai.utility.ListItems;
 
 /**
  * Load manifest.
@@ -59,10 +47,10 @@ public class ListOAIItemsTest
         try {
             String propertyList[] = {
                 "testresources/OAITest.properties"};
-            tFrame = new TFrame(propertyList, "InvLoad");
-            Properties invProp  = tFrame.getProperties();
+            OAIConfig config = OAIConfig.getOAIConfig();
+            Properties invProp = config.getServiceProperties();
             LoggerInf logger = new TFileLogger("testFormatter", 10, 10);
-            db = new DPRFileDB(logger, invProp);
+            db = config.getDB();
             Connection connect = db.getConnection(true);
             OAIMetadata prefix = OAIMetadata.setOAIPrefix("oai_dc");
             OAIDate from = OAIDate.getDBDate("2015-02-06 10:32:51");

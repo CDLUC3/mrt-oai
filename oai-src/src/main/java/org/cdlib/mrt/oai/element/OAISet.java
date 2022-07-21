@@ -32,7 +32,7 @@ package org.cdlib.mrt.oai.element;
 
 
 import org.cdlib.mrt.inv.content.InvCollection;
-import com.lyncode.xoai.dataprovider.model.Set;
+import org.dspace.xoai.dataprovider.model.Set;
 
 /**
  * Run OAI RecordAction

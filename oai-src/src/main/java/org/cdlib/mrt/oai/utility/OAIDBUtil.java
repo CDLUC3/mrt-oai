@@ -29,43 +29,22 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
 package org.cdlib.mrt.oai.utility;
 
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
-import java.io.File;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
+import org.dspace.xoai.dataprovider.exceptions.InternalOAIException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import org.cdlib.mrt.core.Identifier;
-import org.cdlib.mrt.core.DateState;
 import org.cdlib.mrt.db.DBUtil;
 import org.cdlib.mrt.oai.element.OAIItem;
-import org.cdlib.mrt.inv.utility.InvUtil;
 import org.cdlib.mrt.oai.element.OAIDate;
 import org.cdlib.mrt.oai.element.OAIId;
 import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.element.OAISet;
-import org.cdlib.mrt.inv.content.InvAudit;
 import org.cdlib.mrt.inv.content.InvCollection;
-import org.cdlib.mrt.inv.content.InvCollectionNode;
-import org.cdlib.mrt.inv.content.InvCollectionObject;
-import org.cdlib.mrt.inv.content.InvGCopy;
-import org.cdlib.mrt.inv.content.InvDKVersion;
-import org.cdlib.mrt.inv.content.InvDua;
-import org.cdlib.mrt.inv.content.InvFile;
-import org.cdlib.mrt.inv.content.InvIngest;
 import org.cdlib.mrt.inv.content.InvMeta;
-import org.cdlib.mrt.inv.content.InvNode;
-import org.cdlib.mrt.inv.content.InvNodeObject;
-import org.cdlib.mrt.inv.content.InvObject;
-import org.cdlib.mrt.inv.content.InvOwner;
-import org.cdlib.mrt.inv.content.InvVersion;
-import org.cdlib.mrt.utility.FileUtil;
 import org.cdlib.mrt.utility.LoggerInf;
 import org.cdlib.mrt.utility.PropertiesUtil;
-import org.cdlib.mrt.utility.StringUtil;
 import org.cdlib.mrt.utility.TException;
 
 

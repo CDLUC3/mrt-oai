@@ -31,10 +31,10 @@ package org.cdlib.mrt.oai.action;
 
 import java.io.File;
 import java.sql.Connection;
-import com.lyncode.xoai.dataprovider.exceptions.BadArgumentException;
-import com.lyncode.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
+import org.dspace.xoai.dataprovider.exceptions.BadArgumentException;
+import org.dspace.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
+import org.dspace.xoai.dataprovider.exceptions.InternalOAIException;
 import org.cdlib.mrt.core.Identifier;
 
 

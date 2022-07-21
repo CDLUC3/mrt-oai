@@ -29,23 +29,8 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
 package org.cdlib.mrt.oai.element;
 
-import org.cdlib.mrt.oai.action.*;
-import java.io.File;
-import java.sql.Connection;
-import com.lyncode.xoai.dataprovider.exceptions.BadArgumentException;
-import com.lyncode.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
-import org.cdlib.mrt.core.Identifier;
-
-
-import org.cdlib.mrt.inv.content.InvMeta;
-import org.cdlib.mrt.inv.content.InvVersion;
-import org.cdlib.mrt.inv.utility.InvDBUtil;
-import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.utility.TException;
-import org.cdlib.mrt.oai.utility.OAIDBUtil;
-import org.cdlib.mrt.utility.DateUtil;
+import org.dspace.xoai.dataprovider.exceptions.BadArgumentException;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
 import org.cdlib.mrt.utility.StringUtil;
 
 /**

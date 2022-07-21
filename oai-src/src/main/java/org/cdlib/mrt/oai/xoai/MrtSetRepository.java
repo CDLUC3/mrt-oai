@@ -5,27 +5,16 @@
  */
 package org.cdlib.mrt.oai.xoai;
 
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
-import com.lyncode.xoai.dataprovider.handlers.results.ListSetsResult;
-import com.lyncode.xoai.dataprovider.repository.Repository;
-import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
-import com.lyncode.xoai.model.oaipmh.DeletedRecord;
-import com.lyncode.xoai.model.oaipmh.Granularity;
-import com.lyncode.xoai.services.impl.SimpleResumptionTokenFormat;
-import com.lyncode.xoai.dataprovider.repository.SetRepository;
-import com.lyncode.xoai.dataprovider.handlers.results.ListSetsResult;
-import com.lyncode.xoai.dataprovider.model.Set;
+import org.dspace.xoai.dataprovider.exceptions.InternalOAIException;
+import org.dspace.xoai.dataprovider.repository.SetRepository;
+import org.dspace.xoai.dataprovider.handlers.results.ListSetsResult;
+import org.dspace.xoai.dataprovider.model.Set;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import org.cdlib.mrt.inv.content.InvCollection;
 import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.inv.utility.DPRFileDB;
 import org.cdlib.mrt.oai.action.ListSetsAction;
 import org.cdlib.mrt.oai.element.OAISet;
-import org.cdlib.mrt.oai.utility.OAIDBUtil;
 /**
  *
  * @author replic

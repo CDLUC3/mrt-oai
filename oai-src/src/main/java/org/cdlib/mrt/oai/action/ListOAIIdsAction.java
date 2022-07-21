@@ -29,43 +29,23 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
 package org.cdlib.mrt.oai.action;
 
-import java.io.File;
 import java.sql.Connection;
-import com.lyncode.xoai.dataprovider.exceptions.BadArgumentException;
-import com.lyncode.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.IdDoesNotExistException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
-import com.lyncode.xoai.dataprovider.exceptions.NoMatchesException;
-import com.lyncode.xoai.dataprovider.handlers.results.ListItemIdentifiersResult;
-import com.lyncode.xoai.dataprovider.handlers.results.ListItemsResults;
-import com.lyncode.xoai.dataprovider.handlers.results.ListSetsResult;
-import com.lyncode.xoai.dataprovider.model.Item;
-import com.lyncode.xoai.dataprovider.model.ItemIdentifier;
-import com.lyncode.xoai.dataprovider.model.Set;
+import org.dspace.xoai.dataprovider.exceptions.BadArgumentException;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
+import org.dspace.xoai.dataprovider.exceptions.IdDoesNotExistException;
+import org.dspace.xoai.dataprovider.exceptions.InternalOAIException;
+import org.dspace.xoai.dataprovider.handlers.results.ListItemIdentifiersResult;
+import org.dspace.xoai.dataprovider.model.ItemIdentifier;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import org.cdlib.mrt.core.Identifier;
-
-
-import org.cdlib.mrt.core.DateState;
-import org.cdlib.mrt.inv.content.InvMeta;
-import org.cdlib.mrt.inv.content.InvVersion;
-import org.cdlib.mrt.inv.utility.InvDBUtil;
-import org.cdlib.mrt.inv.utility.InvUtil;
 import org.cdlib.mrt.oai.element.OAIDate;
 import org.cdlib.mrt.oai.element.OAIItem;
 import org.cdlib.mrt.oai.element.OAIId;
 import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.element.OAISet;
-import org.cdlib.mrt.oai.xoai.MrtMemoryItem;
 import org.cdlib.mrt.oai.utility.ListOAIItems;
 import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.utility.TException;
 import org.cdlib.mrt.oai.utility.OAIDBUtil;
 import org.cdlib.mrt.utility.DateUtil;
-import org.cdlib.mrt.utility.StringUtil;
 
 /**
  * Run OAI RecordAction

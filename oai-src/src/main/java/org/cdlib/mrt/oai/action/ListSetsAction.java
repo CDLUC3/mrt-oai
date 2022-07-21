@@ -30,8 +30,8 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.cdlib.mrt.oai.action;
 
 import java.sql.Connection;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
+import org.dspace.xoai.dataprovider.exceptions.InternalOAIException;
 import java.util.List;
 import java.util.ArrayList;
 import org.cdlib.mrt.inv.content.InvCollection;

@@ -79,8 +79,23 @@ public class OAIConfig
     public static OAIConfig getOAIConfig()
         throws TException
     {
+        if (DEBUG) {
+            try {
+                if (oaiConfig == null) {
+                    System.out.println("!!!oaiConfig NULL");
+                } else {
+                    System.out.println("!!!oaiConfig NOT null");
+                }
+                throw new Exception();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
         if (oaiConfig != null) return oaiConfig;
-        else return useYaml();
+        else {
+            System.out.println("***USING org.dspace version***");
+            return useYaml();
+        }
     }
     
     protected static OAIConfig useYaml()

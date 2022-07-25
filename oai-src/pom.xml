@@ -79,16 +79,51 @@
 	  <version>4.1.0</version>
        </dependency-->
 
+       <!--
        <dependency>
-	  <groupId>com.lyncode</groupId>
+	  <groupId>org.dspace</groupId>
 	  <artifactId>xoai-data-provider</artifactId>
-	  <version>4.1.1-SNAPSHOT</version>
+	  <version>4.2.1-SNAPSHOT</version>
+       </dependency>
+
+       <dependency>
+	  <groupId>org.dspace</groupId>
+	  <artifactId>xoai-common</artifactId>
+	  <version>4.2.1-SNAPSHOT</version>
+       </dependency>
+       
+
+       <dependency>
+	  <groupId>org.dspace</groupId>
+	  <artifactId>xoai-service-provider</artifactId>
+	  <version>4.2.1-SNAPSHOT</version>
+       </dependency>
+       -->
+       
+
+       <dependency>
+	  <groupId>org.dspace</groupId>
+	  <artifactId>xoai-data-provider</artifactId>
+	  <version>4.2.0</version>
+       </dependency>
+
+       <dependency>
+	  <groupId>org.dspace</groupId>
+	  <artifactId>xoai-common</artifactId>
+	  <version>4.2.0</version>
+       </dependency>
+       
+
+       <dependency>
+	  <groupId>org.dspace</groupId>
+	  <artifactId>xoai-service-provider</artifactId>
+	  <version>4.2.0</version>
        </dependency>
 
        <dependency>
 	  <groupId>com.lyncode</groupId>
-	  <artifactId>xoai-common</artifactId>
-	  <version>4.1.1-SNAPSHOT</version>
+	  <artifactId>xml-io</artifactId>
+	  <version>1.0.3</version>
        </dependency>
 
       <dependency>

@@ -16,43 +16,16 @@
 
 package org.cdlib.mrt.oai.xoai;
 
-import org.cdlib.mrt.oai.app.*;
-import org.cdlib.mrt.oai.test.*;
-import org.cdlib.mrt.oai.test.TestAbstractMrtHandler;
-import com.lyncode.xoai.dataprovider.DataProvider;
-import com.lyncode.test.matchers.xml.XPathMatchers;
-import static com.lyncode.xoai.model.oaipmh.Verb.Type.ListRecords;
-import static com.lyncode.xoai.model.oaipmh.Verb.Type.GetRecord;
-import com.lyncode.xml.exceptions.XmlWriteException;
-import com.lyncode.xoai.model.oaipmh.ResumptionToken;
-import com.lyncode.xoai.xml.XmlWritable;
-import com.lyncode.xoai.xml.XmlWriter;
-import org.hamcrest.Matcher;
+import static org.dspace.xoai.model.oaipmh.Verb.Type.ListRecords;
+import static org.dspace.xoai.model.oaipmh.Verb.Type.GetRecord;
+import org.dspace.xoai.dataprovider.builder.OAIRequestParametersBuilder;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
 
-import javax.xml.stream.XMLStreamException;
-
-import static com.lyncode.test.matchers.xml.XPathMatchers.hasXPath;
-import com.lyncode.xoai.dataprovider.builder.OAIRequestParametersBuilder;
-import com.lyncode.xoai.dataprovider.exceptions.BadArgumentException;
-import com.lyncode.xoai.dataprovider.exceptions.IdDoesNotExistException;
-import com.lyncode.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.model.oaipmh.Verb;
-
-import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
+import org.dspace.xoai.dataprovider.repository.RepositoryConfiguration;
 import java.sql.Connection;
-import java.util.List;
-import org.cdlib.mrt.oai.action.ListSetsAction;
-import org.cdlib.mrt.oai.element.OAIDate;
-import org.cdlib.mrt.oai.element.OAIId;
-import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.element.OAISet;
 import org.cdlib.mrt.oai.element.OAIVerb;
 import org.cdlib.mrt.oai.service.OAIServiceState;
 import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.utility.StringUtil;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CmdHandler  {
     private Connection connection;
@@ -226,7 +199,7 @@ public class CmdHandler  {
     
     public void thrownException(HandlerException handlerException, OAIRequestParametersBuilder builder)
     {
-        builder.withHandlerException(handlerException);
+        //builder.withHandlerException(handlerException);
         this.handlerException = handlerException;
     }
 

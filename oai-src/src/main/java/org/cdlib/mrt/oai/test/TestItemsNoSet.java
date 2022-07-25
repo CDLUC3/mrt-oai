@@ -16,37 +16,21 @@
 
 package org.cdlib.mrt.oai.test;
 
-import org.cdlib.mrt.oai.test.TestAbstractMrtHandler;
-import com.lyncode.xoai.dataprovider.DataProvider;
-import com.lyncode.test.matchers.xml.XPathMatchers;
-import static com.lyncode.xoai.model.oaipmh.Verb.Type.ListRecords;
-import static com.lyncode.xoai.model.oaipmh.Verb.Type.GetRecord;
-import com.lyncode.xml.exceptions.XmlWriteException;
-import com.lyncode.xoai.model.oaipmh.ResumptionToken;
-import com.lyncode.xoai.xml.XmlWritable;
-import com.lyncode.xoai.xml.XmlWriter;
-import org.hamcrest.Matcher;
-
-import javax.xml.stream.XMLStreamException;
-
-import static com.lyncode.test.matchers.xml.XPathMatchers.hasXPath;
-import com.lyncode.xoai.dataprovider.builder.OAIRequestParametersBuilder;
-import com.lyncode.xoai.dataprovider.exceptions.*;
+import org.dspace.xoai.dataprovider.DataProvider;
+import static org.dspace.xoai.model.oaipmh.Verb.Type.ListRecords;
+//import com.lyncode.xoai.dataprovider.builder.OAIRequestParametersBuilder;
+//import com.lyncode.xoai.dataprovider.exceptions.*;
 import java.sql.Connection;
-import java.util.List;
 import java.util.Properties;
 import org.cdlib.mrt.inv.utility.DPRFileDB;
-import org.cdlib.mrt.oai.action.ListSetsAction;
 import org.cdlib.mrt.oai.element.OAIDate;
-import org.cdlib.mrt.oai.element.OAIId;
 import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.element.OAISet;
 import org.cdlib.mrt.utility.LoggerInf;
 import org.cdlib.mrt.utility.StringUtil;
 import org.cdlib.mrt.utility.TFileLogger;
 import org.cdlib.mrt.utility.TFrame;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.dspace.xoai.dataprovider.builder.OAIRequestParametersBuilder;
+import org.dspace.xoai.dataprovider.exceptions.BadArgumentException;
 
 public class TestItemsNoSet extends TestAbstractMrtHandler {
     private static final String NAME = "TestItemsNoSet";
@@ -71,7 +55,7 @@ public class TestItemsNoSet extends TestAbstractMrtHandler {
         OAIRequestParametersBuilder builder = request().withVerb(ListRecords);
         if (StringUtil.isAllBlank(mnemonic)) {
             System.out.println("***OAIRequestParametersBuilder set bad Argument exception");
-            builder.withHandlerException(new BadArgumentException("Missing \"metadataPrefix\""));
+            throw new BadArgumentException("Missing \"metadataPrefix\"");
         }
         builder.withMetadataPrefix(metaType.getOAIPrefix());
         builder.withFrom(from.getUnixDate());

@@ -9,6 +9,7 @@ package org.cdlib.mrt.oai.test;
 import java.sql.Connection;
 import java.util.Properties;
 import org.cdlib.mrt.inv.utility.DPRFileDB;
+import org.cdlib.mrt.oai.action.OAIConfig;
 import org.cdlib.mrt.oai.element.OAIDate;
 import org.cdlib.mrt.oai.element.OAIMetadata;
 import org.cdlib.mrt.oai.xoai.OAIListRecords;
@@ -40,20 +41,18 @@ public class RunOAIListItems
         TFrame tFrame = null;
         DPRFileDB db = null;
         try {
-            String propertyList[] = {
-                "testresources/OAITest.properties"};
-            tFrame = new TFrame(propertyList, "InvLoad");
-            Properties invProp  = tFrame.getProperties();
+            
+            OAIConfig config = OAIConfig.getOAIConfig();
+            Properties invProp = config.getServiceProperties();
             LoggerInf logger = new TFileLogger("testFormatter", 10, 10);
-            db = new DPRFileDB(logger, invProp);
+            db = config.getDB();
             Connection connect = db.getConnection(true);
             OAIMetadata metaType_dcs = OAIMetadata.setOAIPrefix("dcs3.1");
-            
-            OAIMetadata metaType_dc = OAIMetadata.setOAIPrefix("oai_dc");
+            OAIMetadata metaType_dc = OAIMetadata.setOAIPrefix("cdl_dryaddev");
             
             OAIMetadata metaType_sw = OAIMetadata.setOAIPrefix("stash_wrapper");
-            OAIDate from = OAIDate.getDBDate("2016-04-28 10:00:00");
-            OAIDate until = OAIDate.getDBDate("2016-04-29 10:00:00");
+            OAIDate from = OAIDate.getDBDate("2022-07-21 00:06:01");
+            OAIDate until = OAIDate.getDBDate("2022-07-21 10:06:06");
             //OAIDate until = OAIDate.getDBDate("2015-02-06 10:32:51"); // test no results
             //String mnemonic = "dash_cdl";
             String mnemonic = null;

@@ -12,7 +12,7 @@
     <!-- let profiles determine which conf module to run -->
     <profiles>
         <profile>
-            <id>notUC3</id>
+            <id>uc3</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>   
@@ -22,15 +22,6 @@
                 <module>oai-war</module>
             </modules>
         </profile>
-        <profile>
-          <id>uc3</id> 
-            <modules>
-                <module>oai-conf-uc3</module>
-                <module>oai-src</module>
-                <module>oai-war</module>
-            </modules>
-        </profile>
      </profiles>
-
 </project>
 

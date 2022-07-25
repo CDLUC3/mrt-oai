@@ -17,13 +17,13 @@
 package org.cdlib.mrt.oai.test;
 
 import org.cdlib.mrt.oai.test.TestAbstractMrtHandler;
-import com.lyncode.xoai.dataprovider.DataProvider;
+import org.dspace.xoai.dataprovider.DataProvider;
 import com.lyncode.test.matchers.xml.XPathMatchers;
-import static com.lyncode.xoai.model.oaipmh.Verb.Type.ListSets;
+import static org.dspace.xoai.model.oaipmh.Verb.Type.ListSets;
 import com.lyncode.xml.exceptions.XmlWriteException;
-import com.lyncode.xoai.model.oaipmh.ResumptionToken;
-import com.lyncode.xoai.xml.XmlWritable;
-import com.lyncode.xoai.xml.XmlWriter;
+import org.dspace.xoai.model.oaipmh.ResumptionToken;
+import org.dspace.xoai.xml.XmlWritable;
+import org.dspace.xoai.xml.XmlWriter;
 import org.hamcrest.Matcher;
 
 import javax.xml.stream.XMLStreamException;

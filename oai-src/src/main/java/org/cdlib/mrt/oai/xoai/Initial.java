@@ -5,11 +5,11 @@
  */
 package org.cdlib.mrt.oai.xoai;
 
-import com.lyncode.xoai.dataprovider.repository.Repository;
-import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
-import com.lyncode.xoai.model.oaipmh.DeletedRecord;
-import com.lyncode.xoai.model.oaipmh.Granularity;
-import com.lyncode.xoai.services.impl.SimpleResumptionTokenFormat;
+import org.dspace.xoai.dataprovider.repository.Repository;
+import org.dspace.xoai.dataprovider.repository.RepositoryConfiguration;
+import org.dspace.xoai.model.oaipmh.DeletedRecord;
+import org.dspace.xoai.model.oaipmh.Granularity;
+import org.dspace.xoai.services.impl.SimpleResumptionTokenFormat;
 import java.util.Date;
 import org.cdlib.mrt.core.DateState;
 import org.cdlib.mrt.oai.element.OAIDate;

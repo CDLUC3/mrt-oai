@@ -8,12 +8,12 @@ import org.cdlib.mrt.oai.element.OAIMetadata;
 import org.cdlib.mrt.oai.element.OAISet;
 import com.google.common.base.Function;
 import com.lyncode.builder.ListBuilder;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
-import com.lyncode.xoai.model.oaipmh.About;
-import com.lyncode.xoai.model.oaipmh.Metadata;
-import com.lyncode.xoai.model.xoai.Element;
-import com.lyncode.xoai.model.xoai.XOAIMetadata;
-import com.lyncode.xoai.dataprovider.model.Item;
+import org.dspace.xoai.dataprovider.exceptions.InternalOAIException;
+import org.dspace.xoai.model.oaipmh.About;
+import org.dspace.xoai.model.oaipmh.Metadata;
+import org.dspace.xoai.model.xoai.Element;
+import org.dspace.xoai.model.xoai.XOAIMetadata;
+import org.dspace.xoai.dataprovider.model.Item;
 import java.sql.Connection;
 
 import java.util.*;
@@ -36,7 +36,7 @@ public class MrtMemoryItem
     }
 
     private Map<String, Object> values = new HashMap<String, Object>();
-    private List<com.lyncode.xoai.dataprovider.model.Set> setList = null;
+    private List<org.dspace.xoai.dataprovider.model.Set> setList = null;
     private String metadata = null;
     private Metadata localMetadata = null;
 
@@ -92,16 +92,16 @@ public class MrtMemoryItem
     }
 
     @Override
-    public List<com.lyncode.xoai.dataprovider.model.Set> getSets() {
+    public List<org.dspace.xoai.dataprovider.model.Set> getSets() {
         return setList;
     }
     
-    public List<com.lyncode.xoai.dataprovider.model.Set> getSetsOriginal() {
+    public List<org.dspace.xoai.dataprovider.model.Set> getSetsOriginal() {
         List<String> list = ((List<String>) values.get("sets"));
-        return new ListBuilder<String>().add(list.toArray(new String[list.size()])).build(new Function<String, com.lyncode.xoai.dataprovider.model.Set>() {
+        return new ListBuilder<String>().add(list.toArray(new String[list.size()])).build(new Function<String, org.dspace.xoai.dataprovider.model.Set>() {
             @Override
-            public com.lyncode.xoai.dataprovider.model.Set apply(String elem) {
-                return new com.lyncode.xoai.dataprovider.model.Set(elem);
+            public org.dspace.xoai.dataprovider.model.Set apply(String elem) {
+                return new org.dspace.xoai.dataprovider.model.Set(elem);
             }
         });
     }
@@ -141,7 +141,7 @@ public class MrtMemoryItem
         } else {
             this.metadata = metadata;
             localMetadata = new Metadata(metadata);
-            localMetadata.setStraigthCopy(true);
+            //localMetadata.setStraigthCopy(true);
         }
     }
 }

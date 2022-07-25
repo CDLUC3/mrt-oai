@@ -29,37 +29,16 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
 package org.cdlib.mrt.oai.action;
 
-import java.io.File;
-import java.sql.Connection;
-import com.lyncode.xoai.dataprovider.exceptions.BadArgumentException;
-import com.lyncode.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
-import com.lyncode.xoai.dataprovider.model.Context;
-import com.lyncode.xoai.dataprovider.model.MetadataFormat;
-import java.util.ArrayList;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
+import org.dspace.xoai.dataprovider.exceptions.InternalOAIException;
+import org.dspace.xoai.dataprovider.model.Context;
+import org.dspace.xoai.dataprovider.model.MetadataFormat;
 import java.util.List;
 import java.util.Properties;
-import org.cdlib.mrt.core.Identifier;
-
-
-import org.cdlib.mrt.core.DateState;
-import org.cdlib.mrt.inv.content.InvMeta;
-import org.cdlib.mrt.inv.content.InvVersion;
-import org.cdlib.mrt.inv.utility.DPRFileDB;
-import org.cdlib.mrt.inv.utility.InvDBUtil;
-import org.cdlib.mrt.inv.utility.InvUtil;
-import org.cdlib.mrt.oai.element.OAIDate;
-import org.cdlib.mrt.oai.element.OAIId;
-import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.utility.ListItems;
 import org.cdlib.mrt.oai.utility.MetaTypes;
 import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.utility.TException;
-import org.cdlib.mrt.oai.utility.OAIDBUtil;
 import org.cdlib.mrt.utility.DateUtil;
 import org.cdlib.mrt.utility.StringUtil;
-import org.cdlib.mrt.utility.TFileLogger;
 import org.cdlib.mrt.utility.TFrame;
 
 /**

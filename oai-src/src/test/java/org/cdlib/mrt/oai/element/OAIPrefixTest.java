@@ -5,7 +5,6 @@
 
 package org.cdlib.mrt.oai.element;
 
-import org.cdlib.mrt.core.Identifier;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,10 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.cdlib.mrt.utility.TException;
-import com.lyncode.xoai.dataprovider.exceptions.BadArgumentException;
-import com.lyncode.xoai.dataprovider.exceptions.CannotDisseminateFormatException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.InternalOAIException;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
 
 /**
  *

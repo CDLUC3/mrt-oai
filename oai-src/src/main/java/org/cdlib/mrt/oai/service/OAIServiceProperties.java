@@ -29,26 +29,14 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
 
 package org.cdlib.mrt.oai.service;
-import java.util.Properties;
-
-import org.cdlib.mrt.core.ServiceStatus;
 import org.cdlib.mrt.utility.TException;
 import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.utility.StringUtil;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Connection;
 
 
 import org.cdlib.mrt.inv.utility.DPRFileDB;
 import org.cdlib.mrt.oai.action.OAIConfig;
-import org.cdlib.mrt.queue.DistributedQueue;
-import org.cdlib.mrt.utility.PropertiesUtil;
-import org.cdlib.mrt.utility.TFileLogger;
-import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
-import org.cdlib.mrt.utility.TFrame;
+import org.dspace.xoai.dataprovider.repository.RepositoryConfiguration;
 
 /**
  * Base properties for Inv

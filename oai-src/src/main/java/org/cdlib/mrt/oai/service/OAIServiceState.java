@@ -30,25 +30,15 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package org.cdlib.mrt.oai.service;
 
-import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
-import com.lyncode.xoai.model.oaipmh.DeletedRecord;
-import com.lyncode.xoai.model.oaipmh.Granularity;
-import com.lyncode.xoai.model.oaipmh.DeletedRecord;
-import java.io.File;
+import org.dspace.xoai.dataprovider.repository.RepositoryConfiguration;
+import org.dspace.xoai.model.oaipmh.Granularity;
+import org.dspace.xoai.model.oaipmh.DeletedRecord;
 import java.util.Properties;
 import org.cdlib.mrt.oai.action.OAIConfig;
-import org.cdlib.mrt.core.DateState;
-import org.cdlib.mrt.core.ServiceStatus;
-import org.cdlib.mrt.inv.utility.DPRFileDB;
 import org.cdlib.mrt.oai.element.OAIDate;
-import org.cdlib.mrt.oai.utility.OAIUtil;
-import org.cdlib.mrt.utility.LoggerInf;
-import org.cdlib.mrt.utility.PropertiesUtil;
 import org.cdlib.mrt.utility.StringUtil;
 import org.cdlib.mrt.utility.StateInf;
 import org.cdlib.mrt.utility.TException;
-import org.cdlib.mrt.utility.TFileLogger;
-import org.cdlib.mrt.utility.TFrame;
 
 /**
  * Format container class for Fixity Service

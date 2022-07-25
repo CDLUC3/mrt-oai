@@ -16,19 +16,12 @@
 
 package org.cdlib.mrt.oai.xoai;
 
-import com.lyncode.xoai.dataprovider.DataProvider;
-import com.lyncode.xoai.dataprovider.builder.OAIRequestParametersBuilder;
-import com.lyncode.xoai.dataprovider.exceptions.BadArgumentException;
-import com.lyncode.xoai.dataprovider.exceptions.HandlerException;
-import com.lyncode.xoai.dataprovider.exceptions.IdDoesNotExistException;
-import java.sql.Connection;
-import org.cdlib.mrt.utility.StringUtil;
-import org.cdlib.mrt.oai.element.OAIDate;
-import org.cdlib.mrt.oai.element.OAIMetadata;
-import org.cdlib.mrt.oai.element.OAISet;
+import org.dspace.xoai.dataprovider.DataProvider;
+import org.dspace.xoai.dataprovider.builder.OAIRequestParametersBuilder;
+import org.dspace.xoai.dataprovider.exceptions.BadArgumentException;
+import org.dspace.xoai.dataprovider.exceptions.HandlerException;
 import org.cdlib.mrt.utility.LoggerInf;
-import com.lyncode.xoai.model.oaipmh.Verb;
-import org.cdlib.mrt.oai.element.OAIId;
+import org.dspace.xoai.model.oaipmh.Verb;
 
 public class OAIIdentify
     extends OAIMrtHandlerAbstract

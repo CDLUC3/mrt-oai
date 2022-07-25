@@ -16,37 +16,35 @@
 
 package org.cdlib.mrt.oai.xoai;
 
-import org.cdlib.mrt.oai.element.OAIMetadata;
 import com.lyncode.xml.exceptions.XmlWriteException;
-import com.lyncode.xoai.dataprovider.builder.OAIRequestParametersBuilder;
-import com.lyncode.xoai.dataprovider.exceptions.*;
-import com.lyncode.xoai.dataprovider.filter.Filter;
-import com.lyncode.xoai.dataprovider.filter.FilterResolver;
-import com.lyncode.xoai.exceptions.InvalidResumptionTokenException;
-import com.lyncode.xoai.dataprovider.model.Context;
-import com.lyncode.xoai.dataprovider.model.ItemIdentifier;
-import com.lyncode.xoai.dataprovider.model.conditions.Condition;
-import com.lyncode.xoai.model.oaipmh.ResumptionToken;
-import com.lyncode.xoai.dataprovider.parameters.OAICompiledRequest;
-import com.lyncode.xoai.dataprovider.repository.InMemoryItemRepository;
-import com.lyncode.xoai.dataprovider.repository.InMemorySetRepository;
-import com.lyncode.xoai.dataprovider.repository.Repository;
-import com.lyncode.xoai.dataprovider.repository.RepositoryConfiguration;
-import com.lyncode.xoai.services.impl.SimpleResumptionTokenFormat;
-import com.lyncode.xoai.xml.XmlWritable;
-import com.lyncode.xoai.xml.XmlWriter;
+import org.cdlib.mrt.oai.element.OAIMetadata;
+//import org.dspace.xml.exceptions.XmlWriteException;
+import org.dspace.xoai.dataprovider.builder.OAIRequestParametersBuilder;
+import org.dspace.xoai.dataprovider.exceptions.*;
+import org.dspace.xoai.dataprovider.filter.Filter;
+import org.dspace.xoai.dataprovider.filter.FilterResolver;
+import org.dspace.xoai.exceptions.InvalidResumptionTokenException;
+import org.dspace.xoai.dataprovider.model.Context;
+import org.dspace.xoai.dataprovider.model.ItemIdentifier;
+import org.dspace.xoai.dataprovider.model.conditions.Condition;
+import org.dspace.xoai.model.oaipmh.ResumptionToken;
+import org.dspace.xoai.dataprovider.parameters.OAICompiledRequest;
+import org.dspace.xoai.dataprovider.repository.InMemoryItemRepository;
+import org.dspace.xoai.dataprovider.repository.InMemorySetRepository;
+import org.dspace.xoai.dataprovider.repository.Repository;
+import org.dspace.xoai.dataprovider.repository.RepositoryConfiguration;
+import org.dspace.xoai.services.impl.SimpleResumptionTokenFormat;
+import org.dspace.xoai.xml.XmlWritable;
+import org.dspace.xoai.xml.XmlWriter;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import javax.xml.stream.XMLStreamException;
 
-import static com.lyncode.xoai.dataprovider.model.MetadataFormat.identity;
-import com.lyncode.xoai.model.oaipmh.DeletedRecord;
-import com.lyncode.xoai.model.oaipmh.Granularity;
+import static org.dspace.xoai.dataprovider.model.MetadataFormat.identity;
 import java.sql.Connection;
 import org.cdlib.mrt.oai.action.ListMetadatasAction;
-import org.cdlib.mrt.oai.element.OAIDate;
 import org.cdlib.mrt.oai.service.OAIServiceState;
 import org.cdlib.mrt.utility.LoggerInf;
 
@@ -289,7 +287,7 @@ public abstract class OAIMrtHandlerAbstract {
     
     public void thrownException(HandlerException handlerException, OAIRequestParametersBuilder builder)
     {
-        builder.withHandlerException(handlerException);
+        //!!!builder.withHandlerException(handlerException);
         this.handlerException = handlerException;
     }
     

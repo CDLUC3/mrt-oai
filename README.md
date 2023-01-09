@@ -2,6 +2,8 @@
 
 This microservice is part of the [Merritt Preservation System](https://github.com/CDLUC3/mrt-doc).
 
+**This code is deprecated as of Jan 2023.**
+
 ## Purpose
 
 This microservice implements the [Open Archives Initiative
